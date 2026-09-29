@@ -45,11 +45,15 @@
   #bar{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,var(--accent),var(--brand));z-index:100}
 
   /* ===== Hiện dần khi cuộn ===== */
-  .js .rv{opacity:0;transform:translateY(34px);transition:opacity .8s ease,transform .8s ease;transition-delay:var(--d,0s)}
-  .js .rv-l{transform:translateX(-40px)}
-  .js .rv-r{transform:translateX(40px)}
-  .js .rv.in{opacity:1;transform:none}
-  .js .rv.in.done{transition:transform .25s ease,box-shadow .25s ease;transition-delay:0s}
+  /* Không ẩn nội dung ngay từ đầu. Chỉ kích hoạt hiệu ứng khi JS xác nhận
+     IntersectionObserver hoạt động, tránh trường hợp Safari/WebView lỗi JS
+     khiến toàn bộ section biến mất. */
+  .js .rv{opacity:1;transform:none}
+  .reveal-ready .rv{opacity:0;transform:translateY(34px);transition:opacity .8s ease,transform .8s ease;transition-delay:var(--d,0s)}
+  .reveal-ready .rv-l{transform:translateX(-40px)}
+  .reveal-ready .rv-r{transform:translateX(40px)}
+  .reveal-ready .rv.in{opacity:1;transform:none}
+  .reveal-ready .rv.in.done{transition:transform .25s ease,box-shadow .25s ease;transition-delay:0s}
 
   /* ===== Khung ảnh (có dự phòng khi ảnh lỗi) ===== */
   .ph{position:relative;overflow:hidden;background:linear-gradient(135deg,#7a2a1a,#3a2318);display:flex;align-items:center;justify-content:center;color:#f7e3cf;text-align:center}
@@ -264,7 +268,7 @@
     nav ul{display:none;position:absolute;top:64px;left:0;right:0;background:var(--dark);flex-direction:column;padding:18px 20px 22px;gap:16px;align-items:flex-start}
     nav ul.open{display:flex;animation:up .3s}
     .chef .ph{aspect-ratio:4/3}
-    .js .rv-l,.js .rv-r{transform:translateY(34px)}
+    .reveal-ready .rv-l,.reveal-ready .rv-r{transform:translateY(34px)}
     .fab{display:block;position:fixed;right:16px;bottom:16px;z-index:60;background:var(--accent);color:var(--dark);font-weight:800;padding:14px 20px;border-radius:999px;text-decoration:none;box-shadow:var(--shadow);animation:pulse 2.2s infinite}
   }
   @media(max-width:520px){
@@ -692,15 +696,33 @@
     }
   }
 
-  // Hiện dần khi cuộn
-  const io=new IntersectionObserver(es=>es.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.classList.add('in');
-      setTimeout(()=>e.target.classList.add('done'),1300);
-      io.unobserve(e.target);
-    }
-  }),{threshold:.15});
-  $$('.rv').forEach(el=>io.observe(el));
+  // Hiện dần khi cuộn — có fallback để nội dung không bao giờ bị ẩn
+  const revealEls=$$('.rv');
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver(es=>es.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        setTimeout(()=>e.target.classList.add('done'),1300);
+        io.unobserve(e.target);
+      }
+    }),{threshold:.08,rootMargin:'80px 0px'});
+    revealEls.forEach(el=>io.observe(el));
+    document.documentElement.classList.add('reveal-ready');
+
+    // Safari/WebView đôi khi không phát callback ngay sau khi observe.
+    // Hiện ngay các phần tử đang nằm trong viewport.
+    requestAnimationFrame(()=>{
+      revealEls.forEach(el=>{
+        const r=el.getBoundingClientRect();
+        if(r.top < innerHeight+80 && r.bottom > -80){
+          el.classList.add('in');
+          io.unobserve(el);
+        }
+      });
+    });
+  }else{
+    revealEls.forEach(el=>el.classList.add('in'));
+  }
 
   // Tiến trình cuộn, header, nút lên đầu
   const bar=$('#bar'),hd=$('#hd'),tb=$('#top-btn');
