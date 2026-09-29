@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[Tên quán] – Quán nhậu thịt chó bình dân</title>
+<meta name="description" content="[Tên quán] – quán nhậu bình dân với 4 món thịt chó chế biến tại chỗ. Đến đông, ngồi vui, ăn đã.">
+<style>
+  /* ===== MÀU SẮC: đổi tại đây ===== */
+  :root{
+    --bg:#fbf6ee; --ink:#2a1d17; --muted:#6b5a50;
+    --brand:#b8321f; --brand-d:#8f2415; --accent:#e9a23b;
+    --dark:#241914; --card:#ffffff; --line:#eadfce;
+    --r:16px; --shadow:0 8px 24px rgba(42,29,23,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-padding-top:72px}
+  body{font-family:"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;font-size:17px}
+  img{max-width:100%;display:block}
+  a{color:inherit}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+  section{padding:72px 0}
+  h1,h2,h3{line-height:1.2;font-weight:800}
+  h2{font-size:clamp(1.7rem,4vw,2.3rem);margin-bottom:10px}
+  .eyebrow{display:inline-block;color:var(--brand);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.8rem;margin-bottom:8px}
+  .lead{color:var(--muted);max-width:640px;margin-bottom:36px}
+  .btn{display:inline-block;padding:13px 26px;border-radius:999px;font-weight:700;text-decoration:none;border:2px solid transparent;cursor:pointer;font-size:1rem;transition:.2s;font-family:inherit}
+  .btn-primary{background:var(--brand);color:#fff}
+  .btn-primary:hover{background:var(--brand-d)}
+  .btn-ghost{border-color:#fff;color:#fff}
+  .btn-ghost:hover{background:#fff;color:var(--dark)}
+  :focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+  /* ===== Khung ảnh có phương án dự phòng khi ảnh không tải được ===== */
+  .ph{position:relative;overflow:hidden;background:linear-gradient(135deg,#7a2a1a,#3a2318);display:flex;align-items:center;justify-content:center;color:#f7e3cf;text-align:center}
+  .ph::after{content:attr(data-label);position:absolute;inset:auto 12px 12px 12px;font-size:.85rem;opacity:.9;z-index:0}
+  .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+
+  /* ===== Thanh điều hướng ===== */
+  header{position:sticky;top:0;z-index:50;background:rgba(36,25,20,.96);backdrop-filter:blur(6px)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{color:#fff;font-weight:800;font-size:1.15rem;text-decoration:none}
+  .logo span{color:var(--accent)}
+  nav ul{display:flex;gap:22px;list-style:none;align-items:center}
+  nav a{color:#f3e6d8;text-decoration:none;font-weight:600;font-size:.95rem}
+  nav a:hover{color:var(--accent)}
+  nav .btn{padding:8px 18px;color:#fff}
+  .burger{display:none;background:none;border:0;color:#fff;font-size:1.7rem;cursor:pointer}
+
+  /* ===== Phần mở đầu ===== */
+  .hero{position:relative;min-height:88vh;display:flex;align-items:center;color:#fff;padding:60px 0}
+  .hero .ph{position:absolute;inset:0;z-index:0}
+  .hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(24,15,11,.88),rgba(24,15,11,.45))}
+  .hero .wrap{position:relative;z-index:2}
+  .hero h1{font-size:clamp(2.1rem,6vw,3.6rem);max-width:720px;margin-bottom:16px}
+  .hero h1 em{font-style:normal;color:var(--accent)}
+  .hero p{max-width:560px;font-size:1.12rem;margin-bottom:28px;color:#f3e6d8}
+  .hero .cta{display:flex;gap:14px;flex-wrap:wrap}
+  .badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:32px}
+  .badges span{background:rgba(255,255,255,.14);padding:6px 14px;border-radius:999px;font-size:.9rem}
+
+  /* ===== Giới thiệu ===== */
+  .about{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+  .about .ph{aspect-ratio:4/3;border-radius:var(--r);box-shadow:var(--shadow)}
+  .points{list-style:none;margin-top:18px;display:grid;gap:10px}
+  .points li::before{content:"✔";color:var(--brand);font-weight:800;margin-right:10px}
+
+  /* ===== Thực đơn ===== */
+  .menu-bg{background:#fff}
+  .menu{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+  .dish{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;transition:.2s}
+  .dish:hover{transform:translateY(-4px)}
+  .dish .ph{aspect-ratio:16/10}
+  .dish .body{padding:20px 22px 24px;display:flex;flex-direction:column;gap:8px;flex:1}
+  .dish h3{font-size:1.35rem}
+  .dish p{color:var(--muted);font-size:.98rem}
+  .dish .row{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:10px}
+  .price{font-weight:800;color:var(--brand);font-size:1.1rem}
+  .tag{font-size:.78rem;background:#fbe9d0;color:#7a4a10;padding:3px 10px;border-radius:999px;font-weight:700}
+  .note{margin-top:20px;font-size:.9rem;color:var(--muted);text-align:center}
+
+  /* ===== Đầu bếp ===== */
+  .chef{background:var(--dark);color:#f3e6d8}
+  .chef h2{color:#fff}
+  .chef .lead{color:#cdbba9}
+  .chef-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:44px;align-items:center}
+  .chef .ph{aspect-ratio:4/5;border-radius:var(--r)}
+  .steps{display:grid;gap:16px;margin-top:8px}
+  .step{display:flex;gap:16px;align-items:flex-start}
+  .step b{flex:none;width:38px;height:38px;border-radius:50%;background:var(--accent);color:var(--dark);display:grid;place-items:center;font-weight:800}
+  .step h3{font-size:1.05rem;color:#fff;margin-bottom:2px}
+  .step p{font-size:.95rem;color:#cdbba9}
+  blockquote{margin-top:24px;padding-left:16px;border-left:4px solid var(--accent);color:#fff;font-style:italic}
+
+  /* ===== Không gian ===== */
+  .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .gallery .ph{aspect-ratio:1/1;border-radius:var(--r)}
+  .gallery .ph:first-child{grid-column:span 2;aspect-ratio:auto;min-height:260px}
+  .feats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:28px}
+  .feat{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:18px;text-align:center}
+  .feat i{font-style:normal;font-size:1.8rem;display:block}
+  .feat b{display:block;margin-top:4px}
+  .feat small{color:var(--muted)}
+
+  /* ===== Liên hệ / Đặt bàn ===== */
+  .contact{background:linear-gradient(135deg,var(--brand),var(--brand-d));color:#fff}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+  .info{display:grid;gap:14px;margin-top:20px;list-style:none}
+  .info li{display:flex;gap:12px}
+  .info a{font-weight:700}
+  form{background:#fff;color:var(--ink);border-radius:var(--r);padding:26px;display:grid;gap:14px;box-shadow:var(--shadow)}
+  label{font-weight:600;font-size:.92rem;display:grid;gap:5px}
+  input,select,textarea{font:inherit;padding:11px 12px;border:1.5px solid var(--line);border-radius:10px;width:100%;background:#fff;color:var(--ink)}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  #ok{display:none;background:#e7f5e8;color:#1e5a26;padding:12px;border-radius:10px;font-weight:600}
+  footer{background:var(--dark);color:#bba998;text-align:center;padding:26px 20px;font-size:.9rem}
+
+  /* Nút gọi nhanh trên điện thoại */
+  .fab{display:none}
+
+  @media(max-width:860px){
+    section{padding:52px 0}
+    .about,.chef-grid,.contact-grid{grid-template-columns:1fr}
+    .menu{grid-template-columns:1fr}
+    .feats{grid-template-columns:repeat(2,1fr)}
+    .burger{display:block}
+    nav ul{display:none;position:absolute;top:64px;left:0;right:0;background:var(--dark);flex-direction:column;padding:18px 20px 22px;gap:16px;align-items:flex-start}
+    nav ul.open{display:flex}
+    .chef .ph{aspect-ratio:4/3}
+    .fab{display:block;position:fixed;right:16px;bottom:16px;z-index:60;background:var(--accent);color:var(--dark);font-weight:800;padding:14px 20px;border-radius:999px;text-decoration:none;box-shadow:var(--shadow)}
+  }
+  @media(max-width:520px){
+    .gallery{grid-template-columns:1fr 1fr}
+    .two{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top">[Tên quán]<span>.</span></a>
+    <button class="burger" id="burger" aria-label="Mở menu" aria-expanded="false">☰</button>
+    <nav>
+      <ul id="menuList">
+        <li><a href="#gioi-thieu">Giới thiệu</a></li>
+        <li><a href="#thuc-don">Thực đơn</a></li>
+        <li><a href="#dau-bep">Đầu bếp</a></li>
+        <li><a href="#khong-gian">Không gian</a></li>
+        <li><a href="#dat-ban" class="btn btn-primary">Đặt bàn</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ===== MỞ ĐẦU ===== -->
+<section class="hero" style="padding:60px 0">
+  <!-- THAY ẢNH: ảnh nền quán/bàn nhậu. Ảnh dưới đây là ảnh minh họa chung, chưa xác minh là ảnh thịt chó -->
+  <div class="ph" data-label="Ảnh bàn nhậu đông vui – hãy thay bằng ảnh thật của quán">
+    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1600&q=70" alt="Bàn ăn nhiều món nóng hổi, không khí quán nhậu đông vui" loading="eager" onerror="this.remove()">
+  </div>
+  <div class="wrap">
+    <span class="eyebrow" style="color:var(--accent)">Quán nhậu bình dân</span>
+    <h1>Bạn bè quây quần, <em>món thịt chó</em> nóng hổi ngay tại bàn</h1>
+    <p>[Tên quán] chuyên các món thịt chó chế biến tại chỗ: đậm vị, giá bình dân, ngồi thoải mái. Rủ hội bạn đến là vui.</p>
+    <div class="cta">
+      <a href="#dat-ban" class="btn btn-primary">Đặt bàn ngay</a>
+      <a href="#thuc-don" class="btn btn-ghost">Xem thực đơn</a>
+    </div>
+    <div class="badges"><span>🔥 4 món đặc trưng</span><span>👨‍🍳 Chế biến tại chỗ</span><span>🍻 Hợp nhóm bạn, gia đình</span></div>
+  </div>
+</section>
+
+<!-- ===== GIỚI THIỆU ===== -->
+<section id="gioi-thieu">
+  <div class="wrap about">
+    <div>
+      <span class="eyebrow">Về quán</span>
+      <h2>Một quán nhậu để ngồi lâu, nói chuyện nhiều</h2>
+      <p class="lead" style="margin-bottom:0">[Tên quán] không cầu kỳ. Chúng tôi chỉ tập trung vào 4 món thịt chó làm cho thật ngon, bưng ra còn nóng, giá dễ chịu để anh em ghé thường xuyên. Chỗ ngồi thoáng, phục vụ nhanh, thân thiện.</p>
+      <ul class="points">
+        <li>Chỉ 4 món, làm kỹ từng món</li>
+        <li>Nguyên liệu chọn lọc, sơ chế trong ngày <!-- Sửa lại nếu không đúng thực tế --></li>
+        <li>Phù hợp nhóm bạn, đồng nghiệp, tiệc nhỏ</li>
+      </ul>
+    </div>
+    <!-- THAY ẢNH: ảnh không gian hoặc bàn ăn thật của quán -->
+    <div class="ph" data-label="Ảnh không gian quán – thay bằng ảnh thật">
+      <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=70" alt="Không gian quán ăn ấm cúng với bàn ghế gỗ" loading="lazy" onerror="this.remove()">
+    </div>
+  </div>
+</section>
+
+<!-- ===== THỰC ĐƠN: đúng 4 món ===== -->
+<section id="thuc-don" class="menu-bg">
+  <div class="wrap">
+    <span class="eyebrow">Thực đơn</span>
+    <h2>4 món chính của quán</h2>
+    <p class="lead">Ít món nhưng món nào cũng được chăm chút. Giá cụ thể vui lòng hỏi nhân viên hoặc gọi điện.</p>
+
+    <div class="menu">
+      <!-- LƯU Ý ẢNH: 4 ảnh dưới đây chỉ là ảnh món thịt/nướng/lẩu minh họa chung, KHÔNG phải ảnh thịt chó đã xác minh. Hãy thay bằng ảnh món thật của quán. -->
+      <article class="dish">
+        <div class="ph" data-label="Chó Luộc – ảnh minh họa, thay bằng ảnh thật">
+          <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=70" alt="Đĩa thịt luộc thái lát bày trên bàn (ảnh minh họa cho món Chó Luộc)" loading="lazy" onerror="this.remove()">
+        </div>
+        <div class="body">
+          <span class="tag">Món khai vị của bàn nhậu</span>
+          <h3>Chó Luộc</h3>
+          <p>Thịt luộc chín tới, thái lát mỏng, ăn kèm rau thơm và mắm tôm pha đúng vị. Món nhâm nhi đầu bàn.</p>
+          <div class="row"><span class="price">[Giá món]</span><a href="#dat-ban" class="btn btn-primary" style="padding:8px 18px">Đặt bàn</a></div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="ph" data-label="Chó Nướng – ảnh minh họa, thay bằng ảnh thật">
+          <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=70" alt="Thịt nướng xiên trên bếp than hồng (ảnh minh họa cho món Chó Nướng)" loading="lazy" onerror="this.remove()">
+        </div>
+        <div class="body">
+          <span class="tag">Thơm lừng, đậm đà</span>
+          <h3>Chó Nướng</h3>
+          <p>Thịt ướp gia vị, nướng trên than cho thơm cháy cạnh, bên trong vẫn mềm. Ăn nóng mới đã.</p>
+          <div class="row"><span class="price">[Giá món]</span><a href="#dat-ban" class="btn btn-primary" style="padding:8px 18px">Đặt bàn</a></div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="ph" data-label="Lẩu Chó Xáo Măng – ảnh minh họa, thay bằng ảnh thật">
+          <img src="https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?auto=format&fit=crop&w=800&q=70" alt="Nồi lẩu nóng bốc khói đặt giữa bàn (ảnh minh họa cho món Lẩu Chó Xáo Măng)" loading="lazy" onerror="this.remove()">
+        </div>
+        <div class="body">
+          <span class="tag">Hợp đi nhóm đông</span>
+          <h3>Lẩu Chó Xáo Măng</h3>
+          <p>Nồi lẩu nước dùng ngọt thanh, nấu cùng măng, dọn ra bàn còn sôi. Cả nhóm vừa ăn vừa trò chuyện.</p>
+          <div class="row"><span class="price">[Giá món]</span><a href="#dat-ban" class="btn btn-primary" style="padding:8px 18px">Đặt bàn</a></div>
+        </div>
+      </article>
+
+      <article class="dish">
+        <div class="ph" data-label="Chó Xào Lăn – ảnh minh họa, thay bằng ảnh thật">
+          <img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=800&q=70" alt="Món thịt xào lăn trong chảo nóng (ảnh minh họa cho món Chó Xào Lăn)" loading="lazy" onerror="this.remove()">
+        </div>
+        <div class="body">
+          <span class="tag">Đưa cơm, đưa bia</span>
+          <h3>Chó Xào Lăn</h3>
+          <p>Thịt xào lăn với sả ớt và gia vị, sốt sền sệt đậm vị. Ăn với bánh mì hoặc cơm đều hợp.</p>
+          <div class="row"><span class="price">[Giá món]</span><a href="#dat-ban" class="btn btn-primary" style="padding:8px 18px">Đặt bàn</a></div>
+        </div>
+      </article>
+    </div>
+    <p class="note">* Ảnh chỉ mang tính minh họa. Giá và khẩu phần thực tế vui lòng liên hệ quán.</p>
+  </div>
+</section>
+
+<!-- ===== ĐẦU BẾP ===== -->
+<section id="dau-bep" class="chef">
+  <div class="wrap chef-grid">
+    <!-- THAY ẢNH: ảnh đầu bếp thật của quán -->
+    <div class="ph" data-label="Ảnh đầu bếp – thay bằng ảnh thật">
+      <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=800&q=70" alt="Đầu bếp đang chế biến món ăn trong bếp" loading="lazy" onerror="this.remove()">
+    </div>
+    <div>
+      <span class="eyebrow" style="color:var(--accent)">Đứng bếp</span>
+      <h2>[Tên đầu bếp] và cách chế biến của quán</h2>
+      <p class="lead">[Giới thiệu ngắn về đầu bếp: số năm kinh nghiệm, bí quyết gia truyền hoặc phong cách nấu.]</p>
+      <div class="steps">
+        <div class="step"><b>1</b><div><h3>Sơ chế sạch sẽ</h3><p>Thịt được làm sạch, khử mùi kỹ trước khi vào bếp.</p></div></div>
+        <div class="step"><b>2</b><div><h3>Nêm nếm vừa miệng</h3><p>Gia vị, sả, riềng, mẻ… điều chỉnh riêng cho từng món.</p></div></div>
+        <div class="step"><b>3</b><div><h3>Ra món khi còn nóng</h3><p>Nấu theo bàn để món tới tay khách vẫn nóng, thơm.</p></div></div>
+      </div>
+      <blockquote>“[Câu nói của đầu bếp về món ăn hoặc quán.]”</blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ===== KHÔNG GIAN ===== -->
+<section id="khong-gian">
+  <div class="wrap">
+    <span class="eyebrow">Không gian</span>
+    <h2>Ngồi thoải mái, nhậu thoải mái</h2>
+    <p class="lead">Không gian rộng rãi, bàn ghế gọn gàng, hợp cho nhóm bạn, gia đình hay buổi tụ họp cuối tuần.</p>
+    <div class="gallery">
+      <!-- THAY ẢNH: 3 ảnh không gian thật của quán -->
+      <div class="ph" data-label="Khu ngồi chính – thay ảnh thật"><img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1000&q=70" alt="Khu vực bàn ghế rộng rãi của quán ăn" loading="lazy" onerror="this.remove()"></div>
+      <div class="ph" data-label="Góc bàn nhóm – thay ảnh thật"><img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=600&q=70" alt="Nhóm bạn cùng ăn uống, cụng ly" loading="lazy" onerror="this.remove()"></div>
+      <div class="ph" data-label="Khu bếp – thay ảnh thật"><img src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?auto=format&fit=crop&w=600&q=70" alt="Khu bếp và quầy phục vụ của quán" loading="lazy" onerror="this.remove()"></div>
+    </div>
+    <div class="feats">
+      <div class="feat"><i>🪑</i><b>Chỗ ngồi rộng</b><small>Bàn nhỏ đến bàn đông người</small></div>
+      <div class="feat"><i>🍻</i><b>Hợp tụ họp</b><small>Sinh nhật, họp lớp, liên hoan</small></div>
+      <div class="feat"><i>⚡</i><b>Lên món nhanh</b><small>Nóng hổi, đúng bàn</small></div>
+      <div class="feat"><i>💸</i><b>Giá bình dân</b><small>Xem giá tại [Giá món]</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LIÊN HỆ & ĐẶT BÀN ===== -->
+<section id="dat-ban" class="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <span class="eyebrow" style="color:var(--accent)">Liên hệ</span>
+      <h2>Đặt bàn trước để có chỗ đẹp</h2>
+      <p>Gọi cho quán hoặc để lại thông tin bên cạnh, quán sẽ liên hệ xác nhận.</p>
+      <ul class="info">
+        <li>📍 <span>[Địa chỉ]</span></li>
+        <li>📞 <a href="tel:[Số điện thoại]">[Số điện thoại]</a> <!-- Thay bằng số thật, ví dụ tel:0900000000 --></li>
+        <li>🕒 <span>[Giờ mở cửa]</span></li>
+        <li>💬 <span>[Zalo / Facebook của quán]</span></li>
+      </ul>
+      <p style="margin-top:22px"><a href="tel:[Số điện thoại]" class="btn btn-ghost">Gọi đặt bàn</a></p>
+    </div>
+
+    <form id="bookForm" novalidate>
+      <label>Họ tên
+        <input name="name" required placeholder="Nguyễn Văn A">
+      </label>
+      <div class="two">
+        <label>Số điện thoại
+          <input name="phone" type="tel" required placeholder="09xx xxx xxx">
+        </label>
+        <label>Số người
+          <select name="people"><option>2–4 người</option><option>5–8 người</option><option>9–15 người</option><option>Trên 15 người</option></select>
+        </label>
+      </div>
+      <div class="two">
+        <label>Ngày <input name="date" type="date" required></label>
+        <label>Giờ <input name="time" type="time" required></label>
+      </div>
+      <label>Ghi chú (món muốn gọi trước…)
+        <textarea name="note" rows="3"></textarea>
+      </label>
+      <button class="btn btn-primary" type="submit">Gửi yêu cầu đặt bàn</button>
+      <div id="ok" role="status"></div>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>© <span id="y"></span> [Tên quán] – [Địa chỉ] – [Số điện thoại]</footer>
+<a class="fab" href="tel:[Số điện thoại]">📞 Gọi đặt bàn</a>
+
+<script>
+  // Menu điện thoại
+  const burger=document.getElementById('burger'),list=document.getElementById('menuList');
+  burger.addEventListener('click',()=>{const o=list.classList.toggle('open');burger.setAttribute('aria-expanded',o)});
+  list.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{list.classList.remove('open');burger.setAttribute('aria-expanded',false)}));
+
+  document.getElementById('y').textContent=new Date().getFullYear();
+
+  // Ngày tối thiểu là hôm nay
+  const d=document.querySelector('input[name=date]');d.min=new Date().toISOString().split('T')[0];
+
+  // Biểu mẫu đặt bàn (chỉ hiển thị xác nhận trên trình duyệt).
+  // Muốn nhận đơn thật: gắn form với Google Forms, Formspree hoặc backend của bạn.
+  document.getElementById('bookForm').addEventListener('submit',e=>{
+    e.preventDefault();
+    const f=e.target,ok=document.getElementById('ok');
+    if(!f.name.value.trim()||!/^[0-9+\s.-]{8,}$/.test(f.phone.value.trim())||!f.date.value||!f.time.value){
+      ok.style.cssText='display:block;background:#fdeaea;color:#8a1d1d';
+      ok.textContent='Vui lòng nhập đủ họ tên, số điện thoại hợp lệ, ngày và giờ.';return;
+    }
+    ok.style.cssText='display:block';
+    ok.textContent='Cảm ơn '+f.name.value.trim()+'! Quán đã ghi nhận yêu cầu và sẽ liên hệ xác nhận sớm.';
+    f.reset();
+  });
+</script>
+</body>
+</html>
