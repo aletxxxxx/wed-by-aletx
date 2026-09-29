@@ -27,7 +27,7 @@
   .lead{color:var(--muted);max-width:640px;margin-bottom:36px}
   :focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 
-  /* ===== Nút: hiệu ứng ánh sáng quét + nhấn ===== */
+  /* ===== Nút ===== */
   .btn{position:relative;overflow:hidden;display:inline-block;padding:13px 26px;border-radius:999px;font-weight:700;text-decoration:none;border:2px solid transparent;cursor:pointer;font-size:1rem;transition:transform .2s,background .2s,color .2s,box-shadow .2s;font-family:inherit}
   .btn::after{content:"";position:absolute;top:0;left:-70%;width:45%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg)}
   .btn:hover::after{left:130%;transition:left .7s}
@@ -40,10 +40,9 @@
   .pulse{animation:pulse 2.2s infinite}
   @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(233,162,59,.6)}70%{box-shadow:0 0 0 16px rgba(233,162,59,0)}100%{box-shadow:0 0 0 0 rgba(233,162,59,0)}}
 
-  /* ===== Thanh tiến trình cuộn ===== */
   #bar{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,var(--accent),var(--brand));z-index:100}
 
-  /* ===== Hiệu ứng hiện dần khi cuộn (chỉ bật khi có JS) ===== */
+  /* ===== Hiện dần khi cuộn ===== */
   .js .rv{opacity:0;transform:translateY(34px);transition:opacity .8s ease,transform .8s ease;transition-delay:var(--d,0s)}
   .js .rv-l{transform:translateX(-40px)}
   .js .rv-r{transform:translateX(40px)}
@@ -57,7 +56,7 @@
   .zoom:hover img{transform:scale(1.08)}
   .zoom{cursor:zoom-in}
 
-  /* ===== Thanh điều hướng ===== */
+  /* ===== Điều hướng ===== */
   header{position:sticky;top:0;z-index:50;background:rgba(36,25,20,.96);backdrop-filter:blur(6px);transition:box-shadow .3s}
   header.sc{box-shadow:0 6px 20px rgba(0,0,0,.35)}
   .nav{display:flex;align-items:center;justify-content:space-between;height:64px;transition:height .3s}
@@ -73,6 +72,14 @@
   nav .btn{padding:8px 18px;color:#fff}
   .burger{display:none;background:none;border:0;color:#fff;font-size:1.7rem;cursor:pointer}
 
+  /* ===== Nhãn mở cửa / đóng cửa ===== */
+  .status{display:flex;width:fit-content;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;font-weight:700;font-size:.9rem;background:rgba(255,255,255,.16);backdrop-filter:blur(4px);margin-bottom:14px;color:#fff}
+  .status i{width:10px;height:10px;border-radius:50%;background:#b9b0a8;flex:none}
+  .status.open i{background:#39d353;animation:dot 1.6s infinite}
+  .status.soon i{background:#ffc247;animation:dot 1.6s infinite}
+  .status.closed i{background:#ff6b5b}
+  @keyframes dot{0%{box-shadow:0 0 0 0 rgba(57,211,83,.7)}70%{box-shadow:0 0 0 9px rgba(57,211,83,0)}100%{box-shadow:0 0 0 0 rgba(57,211,83,0)}}
+
   /* ===== Phần mở đầu ===== */
   .hero{position:relative;min-height:90vh;display:flex;align-items:center;color:#fff;padding:60px 0;overflow:hidden}
   .hero .ph{position:absolute;inset:0;z-index:0}
@@ -81,8 +88,9 @@
   .hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(24,15,11,.9),rgba(24,15,11,.45))}
   .hero .wrap{position:relative;z-index:3}
   .hero .wrap>*{animation:up .9s both}
-  .hero .wrap>*:nth-child(2){animation-delay:.15s}.hero .wrap>*:nth-child(3){animation-delay:.3s}
-  .hero .wrap>*:nth-child(4){animation-delay:.45s}.hero .wrap>*:nth-child(5){animation-delay:.6s}
+  .hero .wrap>*:nth-child(2){animation-delay:.1s}.hero .wrap>*:nth-child(3){animation-delay:.2s}
+  .hero .wrap>*:nth-child(4){animation-delay:.35s}.hero .wrap>*:nth-child(5){animation-delay:.5s}
+  .hero .wrap>*:nth-child(6){animation-delay:.65s}
   @keyframes up{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
   .hero h1{font-size:clamp(2.1rem,6vw,3.6rem);max-width:720px;margin-bottom:16px}
   .hero h1 em{font-style:normal;background:linear-gradient(90deg,#ffd27a,#ff8a4c,#ffd27a);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 4s linear infinite}
@@ -95,7 +103,6 @@
   .badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:32px}
   .badges span{background:rgba(255,255,255,.14);padding:6px 14px;border-radius:999px;font-size:.9rem;backdrop-filter:blur(4px);transition:.25s}
   .badges span:hover{background:var(--accent);color:var(--dark);transform:translateY(-3px)}
-  /* Tàn lửa bay lên */
   .ember{position:absolute;bottom:-20px;border-radius:50%;background:radial-gradient(circle,#ffb347,#ff5a1f 60%,transparent);z-index:2;opacity:0;animation:rise linear infinite;pointer-events:none}
   @keyframes rise{0%{transform:translate(0,0) scale(1);opacity:0}15%{opacity:.9}100%{transform:translate(var(--x),-95vh) scale(.2);opacity:0}}
   .scroll-hint{position:absolute;bottom:18px;left:50%;z-index:3;width:24px;height:38px;border:2px solid #fff;border-radius:14px;transform:translateX(-50%);opacity:.7}
@@ -131,6 +138,19 @@
   .tag{align-self:flex-start;font-size:.78rem;background:#fbe9d0;color:#7a4a10;padding:3px 10px;border-radius:999px;font-weight:700}
   .note{margin-top:20px;font-size:.9rem;color:var(--muted);text-align:center}
 
+  /* ===== Gợi ý món theo số người ===== */
+  .seg{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px}
+  .seg button{font:inherit;font-weight:700;padding:12px 22px;border-radius:999px;border:2px solid var(--line);background:#fff;color:var(--ink);cursor:pointer;transition:.2s}
+  .seg button:hover{border-color:var(--brand);transform:translateY(-2px)}
+  .seg button[aria-checked=true]{background:var(--brand);border-color:var(--brand);color:#fff;box-shadow:0 8px 18px rgba(184,50,31,.3)}
+  .pick-title{font-size:1.2rem;margin-bottom:14px}
+  .pick-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+  .pk{background:#fff;border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:14px;padding:16px 18px;animation:up .5s both;animation-delay:calc(var(--i)*.1s)}
+  .pk b{display:block;font-size:1.1rem;color:var(--brand);margin-bottom:4px}
+  .pk span{color:var(--muted);font-size:.95rem}
+  .pick-foot{margin-top:20px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+  .pick-foot small{color:var(--muted)}
+
   /* ===== Đầu bếp ===== */
   .chef{background:var(--dark);color:#f3e6d8;position:relative;overflow:hidden}
   .chef::before{content:"🔥";position:absolute;right:-30px;top:-20px;font-size:12rem;opacity:.05;animation:bob 4s infinite}
@@ -158,6 +178,34 @@
   .feat b{display:block;margin-top:4px}
   .feat small{color:var(--muted)}
 
+  /* ===== Lời khen khách quen (thẻ trượt ngang) ===== */
+  .rev-bg{background:#fff}
+  .rev-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+  .arrows{display:flex;gap:10px;margin-bottom:36px}
+  .arrows button{width:44px;height:44px;border-radius:50%;border:2px solid var(--line);background:#fff;font-size:1.2rem;cursor:pointer;color:var(--ink);transition:.2s}
+  .arrows button:hover{background:var(--brand);border-color:var(--brand);color:#fff}
+  .track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 4px 18px;scrollbar-width:thin;scrollbar-color:var(--accent) transparent}
+  .rc{flex:0 0 min(360px,86%);scroll-snap-align:start;background:var(--bg);border:1px solid var(--line);border-radius:var(--r);padding:26px 24px;position:relative;transition:transform .3s,box-shadow .3s}
+  .rc:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+  .rc::before{content:"“";position:absolute;top:2px;right:18px;font-size:5rem;line-height:1;color:var(--accent);opacity:.5;font-family:Georgia,serif}
+  .rc .stars{color:var(--accent);letter-spacing:2px;margin-bottom:10px}
+  .rc p{margin-bottom:16px}
+  .rc footer{background:none;padding:0;text-align:left;display:flex;gap:12px;align-items:center;color:var(--ink);font-size:.95rem}
+  .rc .av{flex:none;width:42px;height:42px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:800}
+  .rc small{display:block;color:var(--muted)}
+
+  /* ===== Hỏi đáp ===== */
+  .faq{max-width:780px}
+  details{background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:12px;overflow:hidden;transition:box-shadow .25s,border-color .25s}
+  details:hover,details[open]{border-color:var(--accent);box-shadow:var(--shadow)}
+  summary{cursor:pointer;padding:18px 22px;font-weight:700;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:14px}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";flex:none;width:30px;height:30px;border-radius:50%;background:var(--bg);color:var(--brand);display:grid;place-items:center;font-size:1.3rem;transition:transform .3s,background .3s}
+  details[open] summary::after{transform:rotate(45deg);background:var(--brand);color:#fff}
+  .ans{padding:0 22px 20px;color:var(--muted);animation:fade .35s}
+  .ans .yes{color:#1e7a34;font-weight:800}
+  .ans a{color:var(--brand);font-weight:700}
+
   /* ===== Liên hệ / Đặt bàn ===== */
   .contact{background:linear-gradient(135deg,var(--brand),var(--brand-d),#c4451f);background-size:200% 200%;animation:bg 10s ease infinite;color:#fff}
   @keyframes bg{50%{background-position:100% 50%}}
@@ -174,25 +222,23 @@
   #ok{display:none;background:#e7f5e8;color:#1e5a26;padding:12px;border-radius:10px;font-weight:600}
   .shake{animation:shake .4s}
   @keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
-  footer{background:var(--dark);color:#bba998;text-align:center;padding:26px 20px;font-size:.9rem}
+  body>footer{background:var(--dark);color:#bba998;text-align:center;padding:26px 20px;font-size:.9rem}
 
-  /* Confetti emoji khi đặt bàn thành công */
   .conf{position:fixed;top:-30px;z-index:200;font-size:1.6rem;pointer-events:none;animation:fall 2.4s ease-in forwards}
   @keyframes fall{to{transform:translateY(110vh) rotate(540deg);opacity:.8}}
 
-  /* Lightbox xem ảnh lớn */
   #lb{position:fixed;inset:0;z-index:150;background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;padding:20px;cursor:zoom-out}
   #lb.open{display:flex;animation:fade .25s}
   #lb img{max-height:88vh;border-radius:12px;animation:pop .3s}
   @keyframes fade{from{opacity:0}}
   @keyframes pop{from{transform:scale(.85);opacity:0}}
 
-  /* Nút lên đầu trang */
   #top-btn{position:fixed;left:16px;bottom:16px;z-index:60;width:44px;height:44px;border-radius:50%;border:0;background:var(--dark);color:#fff;font-size:1.2rem;cursor:pointer;opacity:0;transform:translateY(20px);pointer-events:none;transition:.3s;box-shadow:var(--shadow)}
   #top-btn.show{opacity:1;transform:none;pointer-events:auto}
 
   .fab{display:none}
 
+  @media(max-width:1000px){nav ul{gap:16px}}
   @media(max-width:860px){
     section{padding:52px 0}
     .about,.chef-grid,.contact-grid{grid-template-columns:1fr}
@@ -208,11 +254,12 @@
   @media(max-width:520px){
     .gallery{grid-template-columns:1fr 1fr}
     .two{grid-template-columns:1fr}
+    .seg button{flex:1 1 100%}
   }
-  /* Tôn trọng người dùng muốn giảm chuyển động */
   @media(prefers-reduced-motion:reduce){
     *,*::before,*::after{animation:none!important;transition:none!important}
     .js .rv{opacity:1;transform:none}
+    html{scroll-behavior:auto}
   }
 </style>
 </head>
@@ -229,6 +276,7 @@
         <li><a href="#thuc-don">Thực đơn</a></li>
         <li><a href="#dau-bep">Đầu bếp</a></li>
         <li><a href="#khong-gian">Không gian</a></li>
+        <li><a href="#hoi-dap">Hỏi đáp</a></li>
         <li><a href="#dat-ban" class="btn btn-primary">Đặt bàn</a></li>
       </ul>
     </nav>
@@ -244,12 +292,14 @@
     <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1600&q=70" alt="Bàn ăn nhiều món nóng hổi, không khí quán nhậu đông vui" loading="eager" onerror="this.remove()">
   </div>
   <div class="wrap">
+    <!-- Nhãn mở/đóng cửa: tự cập nhật theo giờ Việt Nam (xem JS, biến OPEN/CLOSE) -->
+    <div class="status" role="status"><i></i><span>Đang kiểm tra giờ mở cửa…</span></div>
     <div class="typed">Hôm nay làm món: <span id="typed"></span><i></i></div>
     <h1>Bạn bè quây quần, <em>món thịt chó</em> nóng hổi ngay tại bàn</h1>
     <p>Cày Hương Bắc chuyên các món thịt chó chế biến tại chỗ: đậm vị, giá bình dân, ngồi thoải mái. Rủ hội bạn đến là vui.</p>
     <div class="cta">
       <a href="#dat-ban" class="btn btn-primary pulse">Đặt bàn ngay</a>
-      <a href="#thuc-don" class="btn btn-ghost">Xem thực đơn</a>
+      <a href="#goi-y" class="btn btn-ghost">Gợi ý món cho nhóm bạn</a>
     </div>
     <div class="badges"><span>🔥 4 món đặc trưng</span><span>👨‍🍳 Chế biến tại chỗ</span><span>🍻 Hợp nhóm bạn, gia đình</span></div>
   </div>
@@ -289,7 +339,7 @@
 
     <div class="menu">
       <!-- LƯU Ý ẢNH: 4 ảnh dưới đây chỉ là ảnh món thịt/nướng/lẩu minh họa chung, KHÔNG phải ảnh thịt chó đã xác minh. Hãy thay bằng ảnh món thật của quán. -->
-      <!-- GIÁ: đang để "100 Đến 200" cho cả 4 món. Bạn có thể thêm đơn vị (vd: nghìn đồng) hoặc sửa giá riêng từng món. -->
+      <!-- GIÁ: đang để "100 Đến 200" cho cả 4 món. Bạn có thể thêm đơn vị hoặc sửa giá riêng từng món. -->
       <article class="dish rv tilt" style="--d:0s">
         <span class="num">1</span>
         <div class="ph zoom" data-label="Chó Luộc – ảnh minh họa, thay bằng ảnh thật">
@@ -346,6 +396,23 @@
   </div>
 </section>
 
+<!-- ===== GỢI Ý MÓN THEO SỐ NGƯỜI ===== -->
+<section id="goi-y">
+  <div class="wrap">
+    <div class="rv">
+      <span class="eyebrow">Gọi món dễ</span>
+      <h2>Đi mấy người? Quán gợi ý món cho bạn</h2>
+      <p class="lead">Chọn số người, web sẽ gợi ý những món hợp với nhóm bạn.</p>
+    </div>
+    <div class="seg rv" role="radiogroup" aria-label="Chọn số người đi ăn" id="seg">
+      <button type="button" role="radio" aria-checked="true" data-k="2">👫 Đi 2 người</button>
+      <button type="button" role="radio" aria-checked="false" data-k="4">👨‍👩‍👧‍👦 Đi 4 người</button>
+      <button type="button" role="radio" aria-checked="false" data-k="hoi">🍻 Cả hội</button>
+    </div>
+    <div id="pickOut" aria-live="polite"></div>
+  </div>
+</section>
+
 <!-- ===== ĐẦU BẾP ===== -->
 <section id="dau-bep" class="chef">
   <div class="wrap chef-grid">
@@ -390,13 +457,77 @@
   </div>
 </section>
 
+<!-- ===== LỜI KHEN TỪ KHÁCH QUEN (thẻ trượt ngang) ===== -->
+<!-- QUAN TRỌNG: chỉ dùng đánh giá THẬT của khách (Google Maps, Facebook, Zalo...). Sao chép nguyên văn và xin phép khách nếu có thể.
+     Mỗi thẻ .rc là một đánh giá: thay chữ trong [ ], thêm/bớt thẻ tùy ý. Nếu chưa có đánh giá thật, hãy xóa cả section này. -->
+<section id="danh-gia" class="rev-bg">
+  <div class="wrap">
+    <div class="rev-head">
+      <div class="rv">
+        <span class="eyebrow">Khách quen nói gì</span>
+        <h2>Lời khen từ khách quen</h2>
+        <p class="lead" style="margin-bottom:0">Vuốt ngang hoặc bấm mũi tên để xem thêm.</p>
+      </div>
+      <div class="arrows"><button type="button" id="prev" aria-label="Xem đánh giá trước">←</button><button type="button" id="next" aria-label="Xem đánh giá tiếp theo">→</button></div>
+    </div>
+    <div class="track rv" id="track" tabindex="0" aria-label="Đánh giá của khách hàng">
+      <article class="rc">
+        <div class="stars" aria-label="[Số sao thật]">[★★★★★]</div>
+        <p>[Dán nguyên văn đánh giá thật của khách quen số 1 tại đây.]</p>
+        <footer><span class="av">A</span><div><b>[Tên khách 1]</b><small>[Nguồn: Google Maps / Facebook / Zalo]</small></div></footer>
+      </article>
+      <article class="rc">
+        <div class="stars" aria-label="[Số sao thật]">[★★★★★]</div>
+        <p>[Dán nguyên văn đánh giá thật của khách quen số 2 tại đây.]</p>
+        <footer><span class="av">B</span><div><b>[Tên khách 2]</b><small>[Nguồn: Google Maps / Facebook / Zalo]</small></div></footer>
+      </article>
+      <article class="rc">
+        <div class="stars" aria-label="[Số sao thật]">[★★★★★]</div>
+        <p>[Dán nguyên văn đánh giá thật của khách quen số 3 tại đây.]</p>
+        <footer><span class="av">C</span><div><b>[Tên khách 3]</b><small>[Nguồn: Google Maps / Facebook / Zalo]</small></div></footer>
+      </article>
+      <article class="rc">
+        <div class="stars" aria-label="[Số sao thật]">[★★★★★]</div>
+        <p>[Dán nguyên văn đánh giá thật của khách quen số 4 tại đây.]</p>
+        <footer><span class="av">D</span><div><b>[Tên khách 4]</b><small>[Nguồn: Google Maps / Facebook / Zalo]</small></div></footer>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HỎI ĐÁP ===== -->
+<section id="hoi-dap">
+  <div class="wrap">
+    <div class="rv">
+      <span class="eyebrow">Hỏi đáp</span>
+      <h2>Bạn hay hỏi quán</h2>
+      <p class="lead">Vài câu khách thường hỏi trước khi đến.</p>
+    </div>
+    <div class="faq rv">
+      <details open>
+        <summary>Quán có nhận đặt bàn nhóm đông không?</summary>
+        <div class="ans"><span class="yes">Có.</span> Quán nhận đặt bàn nhóm đông. Bạn nên đặt trước qua biểu mẫu bên dưới hoặc gọi <a href="tel:0123456789">0123456789</a> để quán sắp chỗ ngồi cho cả hội.</div>
+      </details>
+      <details>
+        <summary>Quán có chỗ đậu xe không?</summary>
+        <div class="ans"><span class="yes">Có.</span> Quán có chỗ đậu xe cho khách. Nếu đi đông hoặc đi ô tô, bạn cứ gọi báo trước để quán hướng dẫn.</div>
+      </details>
+      <details>
+        <summary>Quán có phục vụ mang về không?</summary>
+        <div class="ans"><span class="yes">Có.</span> Quán có phục vụ mang về. Bạn gọi trước <a href="tel:0123456789">0123456789</a> để món được chuẩn bị sẵn, đến là lấy.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
 <!-- ===== LIÊN HỆ & ĐẶT BÀN ===== -->
 <section id="dat-ban" class="contact">
   <div class="wrap contact-grid">
     <div class="rv rv-l">
       <span class="eyebrow" style="color:var(--accent)">Liên hệ</span>
       <h2>Đặt bàn trước để có chỗ đẹp</h2>
-      <p>Gọi cho quán hoặc để lại thông tin bên cạnh, quán sẽ liên hệ xác nhận.</p>
+      <p style="margin-bottom:14px">Gọi cho quán hoặc để lại thông tin bên cạnh, quán sẽ liên hệ xác nhận.</p>
+      <div class="status" role="status"><i></i><span>Đang kiểm tra giờ mở cửa…</span></div>
       <ul class="info">
         <li>📍 <span>02 Đường 72 Minh Hưng Đồng Nai</span></li>
         <li>📞 <a href="tel:0123456789">0123456789</a></li>
@@ -448,10 +579,71 @@
   $$('#menuList a').forEach(a=>a.addEventListener('click',()=>{list.classList.remove('open');burger.setAttribute('aria-expanded',false)}));
   $('#y').textContent=new Date().getFullYear();
 
-  // Nhân đôi dải chữ chạy để lặp liền mạch
+  // Nhân đôi dải chữ chạy
   const mq=$('#mq');mq.innerHTML+=mq.innerHTML;
 
-  // Chữ tự gõ ở phần mở đầu (4 tên món)
+  // ===== Nhãn "Đang mở cửa / Đã đóng cửa" (giờ Việt Nam) =====
+  // ĐỔI GIỜ TẠI ĐÂY: phút tính từ 0h00. 11h00 = 11*60, 23h00 = 23*60
+  const OPEN=11*60, CLOSE=23*60;
+  function vnMinutes(){
+    try{
+      const p=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Ho_Chi_Minh',hour:'numeric',minute:'numeric',hourCycle:'h23'}).formatToParts(new Date());
+      return (+p.find(x=>x.type==='hour').value)*60+(+p.find(x=>x.type==='minute').value);
+    }catch(e){const d=new Date();return d.getHours()*60+d.getMinutes()}
+  }
+  function updateStatus(){
+    const m=vnMinutes();
+    let cls,txt;
+    if(m>=OPEN&&m<CLOSE){
+      const left=CLOSE-m;
+      if(left<=60){cls='soon';txt='Sắp đóng cửa · còn '+left+' phút (đóng lúc 23h00)'}
+      else{cls='open';txt='Đang mở cửa · đóng lúc 23h00'}
+    }else{cls='closed';txt='Đã đóng cửa · mở lại lúc 11h00'}
+    $$('.status').forEach(s=>{s.className='status '+cls;s.querySelector('span').textContent=txt});
+  }
+  updateStatus();setInterval(updateStatus,30000);
+
+  // ===== Gợi ý món theo số người =====
+  // Chỉ dùng đúng 4 món của quán. Sửa nội dung gợi ý tại đây nếu muốn.
+  const picks={
+    '2':{t:'Đi 2 người: gọn gàng, nhâm nhi vừa đủ',sel:0,d:[
+      ['Chó Luộc','Nhâm nhi đầu bàn, vừa ăn vừa trò chuyện.'],
+      ['Chó Xào Lăn','Đưa cơm, đưa bia, dễ chia đôi.']]},
+    '4':{t:'Đi 4 người: đủ vị cho cả nhóm',sel:0,d:[
+      ['Chó Nướng','Thơm lừng, gắp chung rất đã.'],
+      ['Chó Xào Lăn','Đậm vị, đưa cay tốt.'],
+      ['Chó Luộc','Món mở màn nhẹ nhàng cho cả bàn.']]},
+    'hoi':{t:'Cả hội đông vui: gọi nồi lẩu cho cả bàn',sel:1,d:[
+      ['Lẩu Chó Xáo Măng','Nồi lẩu sôi giữa bàn, ai cũng có phần.'],
+      ['Chó Nướng','Gọi thêm cho nóng hổi, thơm lừng.'],
+      ['Chó Luộc','Món nhâm nhi dễ ăn cho cả nhóm.'],
+      ['Chó Xào Lăn','Đổi vị giữa các lượt lẩu.']]}
+  };
+  const out=$('#pickOut'),btns=$$('#seg button');
+  function showPick(k){
+    const p=picks[k];
+    btns.forEach(b=>b.setAttribute('aria-checked',b.dataset.k===k));
+    out.innerHTML='<h3 class="pick-title">'+p.t+'</h3><div class="pick-grid">'+
+      p.d.map((x,i)=>'<div class="pk" style="--i:'+i+'"><b>'+x[0]+'</b><span>'+x[1]+'</span></div>').join('')+
+      '</div><div class="pick-foot"><a href="#dat-ban" class="btn btn-primary" data-sel="'+p.sel+'">Đặt bàn cho nhóm này</a><small>Gợi ý mang tính tham khảo. Khẩu phần cụ thể hỏi nhân viên.</small></div>';
+    out.querySelector('[data-sel]').addEventListener('click',e=>{
+      $('select[name=people]').selectedIndex=+e.currentTarget.dataset.sel;
+    });
+  }
+  btns.forEach(b=>b.addEventListener('click',()=>showPick(b.dataset.k)));
+  showPick('2');
+
+  // ===== Thẻ đánh giá trượt ngang =====
+  const track=$('#track');
+  function slide(dir){
+    const c=track.querySelector('.rc'),step=c?c.offsetWidth+18:320;
+    track.scrollBy({left:dir*step,behavior:reduce?'auto':'smooth'});
+  }
+  $('#prev').addEventListener('click',()=>slide(-1));
+  $('#next').addEventListener('click',()=>slide(1));
+  track.addEventListener('keydown',e=>{if(e.key==='ArrowRight')slide(1);if(e.key==='ArrowLeft')slide(-1)});
+
+  // Chữ tự gõ (4 tên món)
   const words=['Chó Luộc','Chó Nướng','Lẩu Chó Xáo Măng','Chó Xào Lăn'],tp=$('#typed');
   if(reduce){tp.textContent=words[0]}else{
     let w=0,c=0,del=false;
@@ -463,7 +655,7 @@
     })();
   }
 
-  // Tàn lửa bay trong phần mở đầu
+  // Tàn lửa bay
   if(!reduce){
     const hero=$('.hero');
     for(let i=0;i<16;i++){
@@ -474,7 +666,7 @@
     }
   }
 
-  // Hiện dần khi cuộn tới
+  // Hiện dần khi cuộn
   const io=new IntersectionObserver(es=>es.forEach(e=>{
     if(e.isIntersecting){
       e.target.classList.add('in');
@@ -484,7 +676,7 @@
   }),{threshold:.15});
   $$('.rv').forEach(el=>io.observe(el));
 
-  // Tiến trình cuộn, đổ bóng header, nút lên đầu
+  // Tiến trình cuộn, header, nút lên đầu
   const bar=$('#bar'),hd=$('#hd'),tb=$('#top-btn');
   function onScroll(){
     const y=scrollY,h=document.documentElement.scrollHeight-innerHeight;
@@ -502,7 +694,7 @@
   }),{rootMargin:'-45% 0px -50% 0px'});
   $$('main section[id]').forEach(s=>spy.observe(s));
 
-  // Thẻ món nghiêng 3D theo chuột (chỉ trên thiết bị có chuột)
+  // Thẻ món nghiêng 3D theo chuột
   if(matchMedia('(hover:hover)').matches&&!reduce){
     $$('.tilt').forEach(c=>{
       c.addEventListener('mousemove',e=>{
@@ -513,7 +705,7 @@
     });
   }
 
-  // Lightbox: bấm ảnh để xem lớn
+  // Lightbox
   const lb=$('#lb'),lbImg=$('#lb img');
   $$('.zoom').forEach(z=>z.addEventListener('click',()=>{
     const im=z.querySelector('img');if(!im)return;
