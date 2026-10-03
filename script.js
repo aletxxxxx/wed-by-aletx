@@ -1,11 +1,11 @@
-// Khởi tạo các phần tử giao diện cần tương tác
+// Lấy các phần tử giao diện cần tương tác
 const themeToggle = document.querySelector("#theme-toggle");
 const typingText = document.querySelector("#typing-text");
 const shareButton = document.querySelector("#share-button");
 const toast = document.querySelector("#toast");
 const yearElement = document.querySelector("#current-year");
 
-// Đọc theme đã lưu; nếu chưa có thì ưu tiên giao diện theo thiết bị
+// Đọc giao diện đã lưu trong trình duyệt
 const getSavedTheme = () => {
   try {
     return localStorage.getItem("bio-link-theme");
@@ -14,11 +14,12 @@ const getSavedTheme = () => {
   }
 };
 
+// Chọn giao diện đã lưu hoặc theo thiết lập của thiết bị
 const savedTheme = getSavedTheme();
 const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
 const initialTheme = savedTheme || (prefersLight ? "light" : "dark");
 
-// Cập nhật giao diện, biểu tượng và nhãn hỗ trợ trình đọc màn hình
+// Đổi giao diện, cập nhật biểu tượng và lưu lựa chọn
 const setTheme = (theme) => {
   document.documentElement.dataset.theme = theme;
 
@@ -35,19 +36,19 @@ const setTheme = (theme) => {
   try {
     localStorage.setItem("bio-link-theme", theme);
   } catch {
-    // Bỏ qua nếu trình duyệt không cho phép lưu LocalStorage
+    // Bỏ qua nếu trình duyệt không cho phép sử dụng LocalStorage
   }
 };
 
 setTheme(initialTheme);
 
-// Bật/tắt sáng tối khi nhấn nút
+// Bật hoặc tắt giao diện sáng tối khi nhấn nút
 themeToggle.addEventListener("click", () => {
   const currentTheme = document.documentElement.dataset.theme;
   setTheme(currentTheme === "dark" ? "light" : "dark");
 });
 
-// Gõ nội dung bio lần lượt; hiển thị ngay nếu người dùng giảm chuyển động
+// Tạo hiệu ứng gõ chữ cho phần tiểu sử
 const fullBio = typingText.textContent.trim();
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -57,6 +58,7 @@ if (reduceMotion) {
   typingText.textContent = "";
 
   let characterIndex = 0;
+
   const typeNextCharacter = () => {
     if (characterIndex >= fullBio.length) return;
 
@@ -68,7 +70,7 @@ if (reduceMotion) {
   window.setTimeout(typeNextCharacter, 350);
 }
 
-// Sao chép URL trang; dùng textarea làm phương án dự phòng cho trình duyệt cũ
+// Sao chép URL trang, có phương án dự phòng cho trình duyệt cũ
 const copyPageUrl = async () => {
   const pageUrl = window.location.href;
 
@@ -93,17 +95,19 @@ const copyPageUrl = async () => {
   }
 };
 
-// Hiển thị thông báo ngắn sau khi sao chép hoặc khi có lỗi
+// Hiển thị thông báo sau khi sao chép hoặc khi có lỗi
 let toastTimer;
 
 const showToast = (message) => {
   toast.textContent = message;
   window.clearTimeout(toastTimer);
+
   toastTimer = window.setTimeout(() => {
     toast.textContent = "";
   }, 2600);
 };
 
+// Xử lý sự kiện chia sẻ trang
 shareButton.addEventListener("click", async () => {
   try {
     await copyPageUrl();
@@ -115,3 +119,31 @@ shareButton.addEventListener("click", async () => {
 
 // Tự động cập nhật năm ở chân trang
 yearElement.textContent = new Date().getFullYear();
+
+// Ánh sáng nền và hạt lấp lánh theo con trỏ chuột
+const supportsFinePointer = window.matchMedia("(pointer: fine)").matches;
+let lastSparkTime = 0;
+
+if (supportsFinePointer && !reduceMotion) {
+  document.addEventListener("pointermove", (event) => {
+    // Cập nhật vị trí ánh sáng nền theo chuột
+    document.documentElement.style.setProperty("--mouse-x", `${event.clientX}px`);
+    document.documentElement.style.setProperty("--mouse-y", `${event.clientY}px`);
+
+    // Giới hạn số hạt được tạo để hiệu ứng chạy mượt
+    const now = performance.now();
+    if (now - lastSparkTime < 55) return;
+    lastSparkTime = now;
+
+    // Tạo hạt sáng và cho nó tự xóa sau khi chạy hiệu ứng
+    const spark = document.createElement("span");
+    spark.className = "mouse-spark";
+    spark.style.left = `${event.clientX}px`;
+    spark.style.top = `${event.clientY}px`;
+    spark.style.setProperty("--drift-x", `${(Math.random() - 0.5) * 34}px`);
+    spark.style.setProperty("--drift-y", `${(Math.random() - 0.5) * 34}px`);
+
+    document.body.appendChild(spark);
+    spark.addEventListener("animationend", () => spark.remove(), { once: true });
+  });
+}
