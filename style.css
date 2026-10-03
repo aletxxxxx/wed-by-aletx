@@ -1,4 +1,4 @@
-/* Biến giao diện tối mặc định; có thể đổi màu và bo góc tại đây */
+/* Biến giao diện tối mặc định; chỉnh màu và bo góc tại đây */
 :root {
   color-scheme: dark;
   --color-bg: #10120f;
@@ -15,6 +15,7 @@
   --transition: 220ms ease;
 }
 
+/* Biến màu khi chuyển sang giao diện sáng */
 :root[data-theme="light"] {
   color-scheme: light;
   --color-bg: #f3f5ef;
@@ -31,7 +32,12 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
+  position: relative;
   min-width: 320px;
   min-height: 100vh;
   margin: 0;
@@ -50,15 +56,39 @@ body {
   transition: background-color var(--transition), color var(--transition);
 }
 
+/* Nền lưới nhẹ cho giao diện sáng */
 :root[data-theme="light"] body {
   background-image:
     linear-gradient(rgba(36, 49, 26, 0.035) 1px, transparent 1px),
     linear-gradient(90deg, rgba(36, 49, 26, 0.035) 1px, transparent 1px);
 }
 
+/* Ánh sáng nền chuyển động theo vị trí con trỏ */
+body::after {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  background: radial-gradient(
+    380px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(198, 243, 106, 0.09),
+    transparent 72%
+  );
+  content: "";
+  pointer-events: none;
+}
+
+:root[data-theme="light"] body::after {
+  background: radial-gradient(
+    380px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(98, 139, 32, 0.1),
+    transparent 72%
+  );
+}
+
+/* Các vùng phát sáng trang trí */
 .ambient {
   position: fixed;
-  z-index: -1;
+  z-index: 0;
   width: 260px;
   height: 260px;
   border-radius: 50%;
@@ -77,6 +107,13 @@ body {
   right: -140px;
   bottom: 10%;
   opacity: 0.08;
+}
+
+.site-header,
+.profile-card,
+.site-footer {
+  position: relative;
+  z-index: 1;
 }
 
 .site-header {
@@ -222,10 +259,12 @@ body {
 }
 
 .link-card {
+  position: relative;
   min-height: 62px;
   display: flex;
   align-items: center;
   gap: 13px;
+  overflow: hidden;
   padding: 11px 15px;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-button);
@@ -238,6 +277,24 @@ body {
     border-color var(--transition),
     background-color var(--transition),
     box-shadow var(--transition);
+}
+
+/* Vệt sáng lướt qua nút khi rê chuột */
+.link-card::before {
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 70%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.14), transparent);
+  content: "";
+  transform: skewX(-18deg);
+  transition: left 550ms ease;
+  pointer-events: none;
+}
+
+.link-card:hover::before {
+  left: 150%;
 }
 
 .link-card:hover,
@@ -327,6 +384,7 @@ body {
   margin: 0;
 }
 
+/* Ẩn nội dung khỏi giao diện nhưng vẫn hỗ trợ trình đọc màn hình */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -335,6 +393,26 @@ body {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   clip-path: inset(50%);
+}
+
+/* Hạt sáng nhỏ xuất hiện theo chuyển động chuột */
+.mouse-spark {
+  position: fixed;
+  z-index: 5;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow: 0 0 12px var(--color-accent);
+  pointer-events: none;
+  animation: spark-fade 650ms ease-out forwards;
+}
+
+@keyframes spark-fade {
+  to {
+    opacity: 0;
+    transform: translate(var(--drift-x), var(--drift-y)) scale(0);
+  }
 }
 
 @keyframes cursor-blink {
@@ -348,6 +426,7 @@ body {
     opacity: 0;
     transform: translateY(12px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -365,6 +444,7 @@ body {
   }
 }
 
+/* Tắt chuyển động nếu người dùng đã bật tùy chọn giảm hiệu ứng */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -373,5 +453,9 @@ body {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .mouse-spark {
+    display: none;
   }
 }
